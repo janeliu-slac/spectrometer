@@ -1,0 +1,174 @@
+
+record(bo, "$(P):AcquireSet") {
+    field(DESC, "Acquisition on/off")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) ACQUIRE")
+    field(ZNAM, "Stop")
+    field(ONAM, "Acquire")
+}
+
+record(bi, "$(P):Acquire") {
+    field(DESC, "Acquisition on/off")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) ACQUIRE")
+    field(ZNAM, "Stopped")
+    field(ONAM, "Acquiring")
+    field(OSV,  "MINOR")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao, "$(P):UpdateTime") {
+    field(DESC, "Update time")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) UPDATE_TIME")
+    field(PREC, "3")
+    field(EGU,  "s")
+}
+
+record(ai, "$(P):UpdateTime") {
+    field(DESC, "Update time")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) UPDATE_TIME")
+    field(PREC, "3")
+    field(EGU,  "s")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(P):UpdateTimeAct") {
+    field(DESC, "Update time - actual")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) UPDATE_TIME_ACT")
+    field(PREC, "3")
+    field(EGU,  "s")
+    field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P):SerialNumber") {
+    field(DESC, "Device serial number")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) SERIAL_NUM")
+    field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P):Model") {
+    field(DESC, "Device model")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) MODEL")
+    field(SCAN, "I/O Intr")
+}
+
+record(waveform, "$(P):Wavelengths") {
+    field(DESC, "Wavelength array")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) WAVELENGTHS")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(NELM=2048)")
+    field(SCAN, "I/O Intr")
+}
+
+record(waveform, "$(P):Spectrum") {
+    field(DESC, "Spectrum array")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) SPECTRUM")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(NELM=2048)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P):SpectrumLength") {
+    field(DESC, "Spectrum length")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) SPEC_LEN")
+    field(EGU,  "pixels")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(P):MinIntTime") {
+    field(DESC, "Min integration time")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) MIN_INT_TIME")
+    field(EGU,  "ms")
+    field(PREC, "3")
+    field(SCAN, "I/O Intr")
+}
+
+# Autosave this because it has no actual readback
+record(ao, "$(P):IntTimeSet") {
+    field(DESC, "Integration time")
+    field(DTYP, "asynFloat64")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) INT_TIME")
+    field(EGU,  "ms")
+    field(PREC, "3")
+    field(VAL,  "1")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")
+}
+
+record(ai, "$(P):IntTime") {
+    field(DESC, "Integration time")
+    field(DTYP, "asynFloat64")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) INT_TIME")
+    field(EGU,  "ms")
+    field(PREC, "3")
+    field(SCAN, "I/O Intr")
+}
+
+# Autosave this because it has no actual readback
+record(bo, "$(P):ShutterSet") {
+    field(DESC, "Shutter open/close")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) SHUTTER")
+    field(ZNAM, "Close")
+    field(ONAM, "Open")
+    info(autosaveFields, "VAL")
+}
+
+record(bo, "$(P):BkgSubEnable") {
+    field(DESC, "Background subtraction")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) BKG")
+    field(ZNAM, "Disable")
+    field(ONAM, "Enable")
+}
+
+record(bo, "$(P):BkgGet") {
+    field(DESC, "Get background")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) GET_BKG")
+    field(ZNAM, "Standby")
+    field(ONAM, "Get")
+}
+
+record(bo, "$(P):BkgClear") {
+    field(DESC, "Clear background")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) CLEAR_BKG")
+    field(ZNAM, "Standby")
+    field(ONAM, "Clear")
+}
+
+record(stringin, "$(P):APIVersion") {
+    field(DESC, "API version")
+    field(DTYP, "asynOctetRead")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) API_VER")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo, "$(P):APIDebugSet") {
+    field(DESC, "API debug printing")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) API_DBG")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+}
+
+record(bi, "$(P):ConnectionStatus") {
+    field(DESC, "Device connection status")
+    field(DTYP, "asynInt32")
+    field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) CONN")
+    field(ZNAM, "Disconnected")
+    field(ONAM, "Connected")
+    field(ZSV,  "MAJOR")
+    field(SCAN, "I/O Intr")
+}
+

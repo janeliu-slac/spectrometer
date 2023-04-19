@@ -1,0 +1,37 @@
+ContinuousStrobeFeature_FPGA.o ContinuousStrobeFeature_FPGA.d: ContinuousStrobeFeature_FPGA.cpp \
+ ../../../../../include/common/globals.h \
+ ../../../../../include/vendors/OceanOptics/features/continuous_strobe/ContinuousStrobeFeature_FPGA.h \
+ ../../../../../include/common/features/FeatureImpl.h \
+ ../../../../../include/common/SeaBreeze.h \
+ ../../../../../include/common/exceptions/FeatureProtocolNotFoundException.h \
+ ../../../../../include/common/exceptions/FeatureException.h \
+ ../../../../../include/common/features/Feature.h \
+ ../../../../../include/common/buses/Bus.h \
+ ../../../../../include/common/protocols/ProtocolHint.h \
+ ../../../../../include/common/buses/TransferHelper.h \
+ ../../../../../include/common/exceptions/BusTransferException.h \
+ ../../../../../include/common/exceptions/BusException.h \
+ ../../../../../include/common/buses/BusFamily.h \
+ ../../../../../include/common/buses/DeviceLocatorInterface.h \
+ ../../../../../include/common/exceptions/IllegalArgumentException.h \
+ ../../../../../include/common/features/FeatureFamily.h \
+ ../../../../../include/common/protocols/Protocol.h \
+ ../../../../../include/common/protocols/ProtocolFamily.h \
+ ../../../../../include/common/protocols/ProtocolHelper.h \
+ ../../../../../include/vendors/OceanOptics/features/continuous_strobe/ContinuousStrobeFeatureInterface.h \
+ ../../../../../include/vendors/OceanOptics/protocols/ooi/impls/OOIProtocol.h \
+ ../../../../../include/vendors/OceanOptics/features/fpga_register/FPGARegisterFeature.h \
+ ../../../../../include/vendors/OceanOptics/features/fpga_register/FPGARegisterFeatureInterface.h \
+ ../../../../../include/vendors/OceanOptics/features/light_source/StrobeLampFeature.h \
+ ../../../../../include/vendors/OceanOptics/features/light_source/StrobeLampFeatureInterface.h \
+ ../../../../../include/vendors/OceanOptics/protocols/ooi/constants/FPGARegisterCodes.h \
+ ../../../../../include/vendors/OceanOptics/protocols/ooi/impls/OOIStrobeLampProtocol.h \
+ ../../../../../include/vendors/OceanOptics/protocols/ooi/exchanges/StrobeEnableExchange.h \
+ ../../../../../include/common/protocols/Transfer.h \
+ ../../../../../include/common/protocols/Exchange.h \
+ ../../../../../include/common/Data.h \
+ ../../../../../include/common/UnitDescriptor.h \
+ ../../../../../include/common/exceptions/ProtocolException.h \
+ ../../../../../include/vendors/OceanOptics/protocols/interfaces/StrobeLampProtocolInterface.h \
+ ../../../../../include/common/exceptions/FeatureControlException.h \
+ ../../../../../include/api/seabreezeapi/FeatureFamilies.h
