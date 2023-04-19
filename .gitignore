@@ -1,6 +1,8 @@
 /bin
 /db
 /dbd
-/lib
+/lib/
+seabreezeSupport/vendor/SeaBreeze/lib/
 O.*
+envPaths
 RELEASE_SITE
