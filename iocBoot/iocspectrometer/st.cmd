@@ -1,4 +1,4 @@
-#!../../bin/rhel6-x86_64/spectrometer
+#!../../bin/rhel7-x86_64/spectrometer
 
 < envPaths
 cd "${TOP}"

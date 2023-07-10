@@ -5,8 +5,11 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
-R1.0.0   19-Apr-2023
+R1.0.0   19-Apr-2023  M. Dunning (mdunning)
          Inital version
+
+R1.0.1   10-Jul-2023  M. Dunning (mdunning)
+         Decouple seabreeze source code.  Source code now lives in $PACKAGE_TOP.
 
 # End of file
 

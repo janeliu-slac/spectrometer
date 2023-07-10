@@ -1,52 +1,32 @@
 
-Spectrometer EPICS module
+spectrometer EPICS module
 ==========================
 
 An epics support module for spectrometers (yep, you guessed it)
 
-This module includes the SeaBreeze source code (see below).
-
 To add this module to an IOC application:
     - Add release path to configure/RELEASE
+    - Add package to configure/CONFIG_SITE:
+        SEABREEZE_PACKAGE_NAME = seabreeze
+        SEABREEZE_VERSION      = 3.0.11
+        SEABREEZE_TOP          = $(PACKAGE_SITE_TOP)/$(SEABREEZE_PACKAGE_NAME)/$(SEABREEZE_VERSION)
+        SEABREEZE_LIB          = $(SEABREEZE_TOP)/$(PKG_ARCH)/lib
+        SEABREEZE_INCLUDE      = $(SEABREEZE_TOP)/$(PKG_ARCH)/include
     - Add to src/Makefile:
+        seabreeze_DIR = $(SEABREEZE_LIB)
         $(PROD_NAME)_DBD += base.dbd
         $(PROD_NAME)_DBD += asyn.dbd
         $(PROD_NAME)_DBD += spectrometer.dbd
         #
-        $(PROD_NAME)_LIBS += seabreeze
+        PROD_LIBS += seabreeze
         $(PROD_NAME)_LIBS += spectrometer
         $(PROD_NAME)_LIBS += asyn
         $(PROD_NAME)_SYS_LIBS_Linux += usb
     - For ocean optics spectrometers, optionally install db files, e.g.:
         DB_INSTALLS += $(SPECTROMETER)/db/seabreezeAPI.template
 
+See $(TOP)/iocBoot/iocspectrometer/st.cmd for an example IOC startup script.
 ---------------------------------------------------------------------------------------
-SeaBreeze
-
-Open-source C/C++ API for select Ocean Optics USB spectrometers.
-
-For more info see:
-https://sourceforge.net/projects/seabreeze/
-https://www.oceaninsight.com/globalassets/catalog-blocks-and-images/software-downloads-installers/javadocs-api/seabreeze/html/index.html
-
-Cross-compilation of source code is currently not supported.
-Building on windows is not supported.
-
-External dependencies:
-libusb-0.1
-Be sure to include the libusb-0.1 library in your IOC application.  For example, in src/Makefile:
-myApp_SYS_LIBS_Linux += usb
-
-There are examples and test programs here:
-seabreezeSupport/vendor/SeaBreeze/sample-code/
-seabreezeSupport/vendor/SeaBreeze/test/
-
-There is a udev rule here:
-seabreezeSupport/vendor/SeaBreeze/os-support/linux/
-
-To upgrade the source code, download the latest version from:
-https://sourceforge.net/projects/seabreeze/files/latest/download
-Then unzip and drop the contents of the seabreeze-<version> directory into $(TOP)/seabreezeSupport/vendor/ and rebuild.
 
 Note regarding seabreeze API and EPICS drivers:
     There are two different versions of the API and thus two different EPICS drivers:

@@ -4,26 +4,29 @@ include $(TOP)/configure/CONFIG
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 #========================================
 
-USR_INCLUDES += -I$(SEABREEZE)/vendor/SeaBreeze/include
+# =====================================================
+# Path to "NON EPICS" External PACKAGES: USER INCLUDES
+# ======================================================
+USR_INCLUDES += -I$(SEABREEZE_INCLUDE)
 
 #========================================
 # Build an IOC support library
-LIBRARY_IOC += spectrometer
+PROD_NAME = spectrometer
+LIBRARY_IOC += $(PROD_NAME)
 
 # Install dbd files
-DBD += spectrometer.dbd
+DBD += $(PROD_NAME).dbd
 
-spectrometer_DBD += base.dbd
-spectrometer_DBD += asyn.dbd
-spectrometer_DBD += spectrometerSupport.dbd
+$(PROD_NAME)_DBD += base.dbd
+$(PROD_NAME)_DBD += asyn.dbd
+$(PROD_NAME)_DBD += $(PROD_NAME)Support.dbd
 
 # The following are compiled and added to the Support library
-spectrometer_SRCS += drvSeaBreezeWrapper.cpp
-spectrometer_SRCS += drvSeaBreezeAPI.cpp
+$(PROD_NAME)_SRCS += drvSeaBreezeWrapper.cpp
+$(PROD_NAME)_SRCS += drvSeaBreezeAPI.cpp
 
-spectrometer_LIBS += seabreeze
-spectrometer_LIBS += asyn
-spectrometer_LIBS += $(EPICS_BASE_IOC_LIBS)
+$(PROD_NAME)_LIBS += asyn
+$(PROD_NAME)_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #========================================
 include $(TOP)/configure/RULES

@@ -52,7 +52,17 @@ STATIC_BUILD=YES
 # =============================
 # Define the archiecture versions
 # =============================
-#LINUXRT_BUILDROOT_VERSION=buildroot-2019.08
-#LINUX_VERSION=rhel6
+LINUXRT_BUILDROOT_VERSION=buildroot-2019.08
+LINUX_VERSION=rhel7
+
+# =======================================================
+# Names/locations of external non-EPICS packages
+# =======================================================
+SEABREEZE_PACKAGE_NAME = seabreeze
+SEABREEZE_VERSION      = 3.0.11
+SEABREEZE_TOP          = $(PACKAGE_SITE_TOP)/$(SEABREEZE_PACKAGE_NAME)/$(SEABREEZE_VERSION)
+SEABREEZE_LIB          = $(SEABREEZE_TOP)/$(PKG_ARCH)/lib
+SEABREEZE_INCLUDE      = $(SEABREEZE_TOP)/$(PKG_ARCH)/include
 
 # End of file
+
