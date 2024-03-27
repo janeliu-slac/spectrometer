@@ -543,8 +543,7 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
             int num_shutter_features = sbapi_get_number_of_shutter_features(_device_id, &error);
             _check_error(_device_id, error, "sbapi_get_number_of_shutter_features");
             if (num_shutter_features) {
-                long* features;
-                features = new long[num_shutter_features];
+                long* features = new long[num_shutter_features];
                 num_shutter_features = sbapi_get_shutter_features(_device_id,
                         &error, features, sizeof(features));
                 if (num_shutter_features) {
@@ -556,6 +555,7 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
                     sbapi_shutter_set_shutter_open(_device_id, feature, &error, (unsigned char)value);
                     _check_error(_device_id, error, "sbapi_shutter_set_shutter_open");
                 }
+                delete[] features;
             } else {
                 asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
                         "%s::%s: Device 0x%02lX has no shutter features\n",
