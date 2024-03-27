@@ -77,6 +77,7 @@ drvSeaBreezeAPI::drvSeaBreezeAPI(const char *port, const char* serialNum, int nu
     createParam(clearBkgString,            asynParamInt32,         &P_clearBkg);
     createParam(connStatusString,          asynParamInt32,         &P_conn);
     createParam(reconnectString,           asynParamInt32,         &P_reconn);
+    createParam(trigModeString,            asynParamInt32,         &P_trigMode);
 
     // Start the main thread
     epicsThreadId tid = epicsThreadCreate("drvSeaBreezeAPIMain",
@@ -571,6 +572,9 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
         for (int i=0; i<_spectrum_length; i++) {
             _background_spectrum[i] = 0.0;
         }
+    } else if (function == P_trigMode) {
+        sbapi_spectrometer_set_trigger_mode(_device_id, _feature_id, &error, value);
+        _check_error(_device_id, error, "sbapi_spectrometer_set_trigger_mode");
     } else {
         /* All other parameters just get set in parameter list, no need to
          * act on them here */

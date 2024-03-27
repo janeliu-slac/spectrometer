@@ -6,3 +6,4 @@ seabreezeSupport/vendor/SeaBreeze/lib/
 O.*
 envPaths
 RELEASE_SITE
+*.swp

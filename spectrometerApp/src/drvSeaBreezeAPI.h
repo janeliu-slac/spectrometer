@@ -31,6 +31,7 @@
 #define clearBkgString           "CLEAR_BKG"        /* asynInt32         r/w */
 #define connStatusString         "CONN"             /* asynInt32         r/o */
 #define reconnectString          "RECONN"           /* asynInt32         r/w */
+#define trigModeString           "TRIG_MODE"        /* asynInt32         r/w */
 
 
 class drvSeaBreezeAPI : public asynPortDriver{
@@ -61,6 +62,7 @@ protected:
     int P_clearBkg;
     int P_conn;
     int P_reconn;
+    int P_trigMode;
 
 private:
     bool _running;
