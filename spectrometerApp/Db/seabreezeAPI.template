@@ -75,6 +75,7 @@ record(waveform, "$(P):Spectrum") {
     field(FTVL, "DOUBLE")
     field(NELM, "$(NELM=2048)")
     field(SCAN, "I/O Intr")
+    info(autosaveFields, "TSE")
 }
 
 record(longin, "$(P):SpectrumLength") {

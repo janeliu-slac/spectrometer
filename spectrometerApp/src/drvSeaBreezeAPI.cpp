@@ -22,6 +22,9 @@
 #include <epicsEvent.h>
 #include <epicsExit.h>
 #include <epicsTime.h>
+#ifdef EVR_SUPPORT
+#include <evrTime.h>
+#endif
 #include <iocsh.h>
 #include <alarm.h>
 //#include <dbAccess.h>
@@ -488,6 +491,17 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
         }
     }
 
+#ifdef EVR_SUPPORT
+    epicsTimeStamp evr_timestamp;
+    if (evrTimeGet(&evr_timestamp, 0) == 0) {
+        if (setTimeStamp(&evr_timestamp) != asynSuccess) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
+                    "%s::%s: Error in setTimeStamp()\n",
+                    driverName.c_str(), functionName.c_str());
+        }
+    }
+#endif
+
     status = doCallbacksFloat64Array(_wavelengths, _spectrum_length, P_wavelengths, 0);
     status = doCallbacksFloat64Array(_spectrum, _spectrum_length, P_spectrum, 0);
 
@@ -496,7 +510,6 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
                 "%s::%s: Error in spectrum callback\n",
                 driverName.c_str(), functionName.c_str());
     }
-        
 }
 
 
