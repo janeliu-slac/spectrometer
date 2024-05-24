@@ -26,18 +26,9 @@ $(PROD_NAME)_DBD += base.dbd
 $(PROD_NAME)_DBD += asyn.dbd
 $(PROD_NAME)_DBD += $(PROD_NAME)Support.dbd
 
-ifdef EVRCLIENT
-$(PROD_NAME)_DBD += evrSupport.dbd
-$(PROD_NAME)_DBD += devMrfEr.dbd
-endif
-
 # The following are compiled and added to the Support library
 $(PROD_NAME)_SRCS += drvSeaBreezeWrapper.cpp
 $(PROD_NAME)_SRCS += drvSeaBreezeAPI.cpp
-
-ifdef EVRCLIENT
-$(PROD_NAME)_LIBS += evrSupport
-endif
 
 $(PROD_NAME)_LIBS += asyn
 $(PROD_NAME)_LIBS += $(EPICS_BASE_IOC_LIBS)
