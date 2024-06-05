@@ -30,8 +30,11 @@ TIMINGAPI_MODULE_VERSION = R0.6
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================)
 ASYN = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
-EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
-TIMINGAPI = $(EPICS_MODULES)/timingApi/$(TIMINGAPI_MODULE_VERSION)
+
+ifeq ($(findstring pcds,$(FACILITY_ROOT)),)
+    EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
+    TIMINGAPI = $(EPICS_MODULES)/timingApi/$(TIMINGAPI_MODULE_VERSION)
+endif
 
 # Set EPICS_BASE last so it appears last in the DB, DBD, INCLUDE, and LIB search paths
 EPICS_BASE = $(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
