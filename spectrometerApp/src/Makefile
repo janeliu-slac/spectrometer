@@ -4,6 +4,11 @@ include $(TOP)/configure/CONFIG
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 #========================================
 
+# Set a flag if we're using an EVR, so that the driver gets EVR timestamps
+ifdef EVRCLIENT
+USR_CXXFLAGS += -DEVR_SUPPORT
+endif
+
 # =====================================================
 # Path to "NON EPICS" External PACKAGES: USER INCLUDES
 # ======================================================

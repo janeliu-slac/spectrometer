@@ -75,6 +75,7 @@ record(waveform, "$(P):Spectrum") {
     field(FTVL, "DOUBLE")
     field(NELM, "$(NELM=2048)")
     field(SCAN, "I/O Intr")
+    info(autosaveFields, "TSE")
 }
 
 record(longin, "$(P):SpectrumLength") {
@@ -123,6 +124,8 @@ record(bo, "$(P):ShutterSet") {
     field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) SHUTTER")
     field(ZNAM, "Close")
     field(ONAM, "Open")
+    field(VAL,  "1")
+    field(PINI, "1")
     info(autosaveFields, "VAL")
 }
 
@@ -166,5 +169,18 @@ record(bo, "$(P):Reconnect") {
     field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) RECONN")
     field(ZNAM, "Standby")
     field(ONAM, "Reconnect")
+}
+
+# Autosave this because it has no actual readback
+record(mbbo, "$(P):TrigModeSet") {
+    field(DESC, "Trigger mode")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) TRIG_MODE")
+    field(ZRVL, "0")
+    field(ZRST, "Software")
+    field(ONVL, "1")
+    field(ONST, "External")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")
 }
 

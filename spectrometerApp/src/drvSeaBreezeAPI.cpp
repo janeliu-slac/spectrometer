@@ -22,6 +22,9 @@
 #include <epicsEvent.h>
 #include <epicsExit.h>
 #include <epicsTime.h>
+#ifdef EVR_SUPPORT
+#include <evrTime.h>
+#endif
 #include <iocsh.h>
 #include <alarm.h>
 //#include <dbAccess.h>
@@ -77,6 +80,7 @@ drvSeaBreezeAPI::drvSeaBreezeAPI(const char *port, const char* serialNum, int nu
     createParam(clearBkgString,            asynParamInt32,         &P_clearBkg);
     createParam(connStatusString,          asynParamInt32,         &P_conn);
     createParam(reconnectString,           asynParamInt32,         &P_reconn);
+    createParam(trigModeString,            asynParamInt32,         &P_trigMode);
 
     // Start the main thread
     epicsThreadId tid = epicsThreadCreate("drvSeaBreezeAPIMain",
@@ -487,6 +491,17 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
         }
     }
 
+#ifdef EVR_SUPPORT
+    epicsTimeStamp evr_timestamp;
+    if (evrTimeGet(&evr_timestamp, 0) == 0) {
+        if (setTimeStamp(&evr_timestamp) != asynSuccess) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
+                    "%s::%s: Error in setTimeStamp()\n",
+                    driverName.c_str(), functionName.c_str());
+        }
+    }
+#endif
+
     status = doCallbacksFloat64Array(_wavelengths, _spectrum_length, P_wavelengths, 0);
     status = doCallbacksFloat64Array(_spectrum, _spectrum_length, P_spectrum, 0);
 
@@ -495,7 +510,6 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
                 "%s::%s: Error in spectrum callback\n",
                 driverName.c_str(), functionName.c_str());
     }
-        
 }
 
 
@@ -542,8 +556,7 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
             int num_shutter_features = sbapi_get_number_of_shutter_features(_device_id, &error);
             _check_error(_device_id, error, "sbapi_get_number_of_shutter_features");
             if (num_shutter_features) {
-                long* features;
-                features = new long[num_shutter_features];
+                long* features = new long[num_shutter_features];
                 num_shutter_features = sbapi_get_shutter_features(_device_id,
                         &error, features, sizeof(features));
                 if (num_shutter_features) {
@@ -555,6 +568,7 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
                     sbapi_shutter_set_shutter_open(_device_id, feature, &error, (unsigned char)value);
                     _check_error(_device_id, error, "sbapi_shutter_set_shutter_open");
                 }
+                delete[] features;
             } else {
                 asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
                         "%s::%s: Device 0x%02lX has no shutter features\n",
@@ -571,6 +585,9 @@ asynStatus drvSeaBreezeAPI::writeInt32(asynUser *pasynUser, epicsInt32 value) {
         for (int i=0; i<_spectrum_length; i++) {
             _background_spectrum[i] = 0.0;
         }
+    } else if (function == P_trigMode) {
+        sbapi_spectrometer_set_trigger_mode(_device_id, _feature_id, &error, value);
+        _check_error(_device_id, error, "sbapi_spectrometer_set_trigger_mode");
     } else {
         /* All other parameters just get set in parameter list, no need to
          * act on them here */
