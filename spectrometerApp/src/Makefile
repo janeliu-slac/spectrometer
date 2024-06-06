@@ -35,6 +35,9 @@ $(PROD_NAME)_SRCS += spectrometerMain.cpp
 
 $(PROD_NAME)_LIBS += asyn
 $(PROD_NAME)_LIBS += seabreeze
+ifdef EVRCLIENT
+$(PROD_NAME)_LIBS += evrSupport
+endif
 $(PROD_NAME)_SYS_LIBS_Linux += usb
 $(PROD_NAME)_LIBS += $(EPICS_BASE_IOC_LIBS)
 
