@@ -2,7 +2,7 @@
 spectrometer EPICS module
 ==========================
 
-An epics support module for spectrometers (yep, you guessed it)
+An epics support module for spectrometers and related devices
 
 To add this module to an IOC application:
     - Add release path to configure/RELEASE
@@ -22,13 +22,13 @@ To add this module to an IOC application:
         $(PROD_NAME)_LIBS += spectrometer
         $(PROD_NAME)_LIBS += asyn
         $(PROD_NAME)_SYS_LIBS_Linux += usb
-    - For ocean optics spectrometers, optionally install db files, e.g.:
+    - For Ocean Optics spectrometers, optionally install db files, e.g.:
         DB_INSTALLS += $(SPECTROMETER)/db/seabreezeAPI.template
 
 See $(TOP)/iocBoot/iocspectrometer/st.cmd for an example IOC startup script.
 ---------------------------------------------------------------------------------------
 
-Note regarding seabreeze API and EPICS drivers:
+Note regarding Seabreeze API and EPICS drivers:
     There are two different versions of the API and thus two different EPICS drivers:
         1) SeaBreezeAPI (newer) --> drvSeaBreezeAPI
         2) SeaBreezeWrapper (older) --> drvSeaBreezeWrapper
@@ -38,6 +38,5 @@ Note regarding seabreeze API and EPICS drivers:
 
 CAUTION: Some functions in the seabreeze API are not thread safe.
     This can crash the IOC when running multiple spectrometers per IOC.
-    A single spectrometer per IOC ensures maximum reliability.
 ---------------------------------------------------------------------------------------
 
