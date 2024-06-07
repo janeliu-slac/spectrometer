@@ -32,6 +32,7 @@
 #define connStatusString         "CONN"             /* asynInt32         r/o */
 #define reconnectString          "RECONN"           /* asynInt32         r/w */
 #define trigModeString           "TRIG_MODE"        /* asynInt32         r/w */
+#define eventCodeString          "EVENT_CODE"       /* asynInt32         r/w */
 
 
 class drvSeaBreezeAPI : public asynPortDriver{
@@ -63,6 +64,7 @@ protected:
     int P_conn;
     int P_reconn;
     int P_trigMode;
+    int P_eventCode;
 
 private:
     bool _running;

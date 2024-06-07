@@ -81,6 +81,7 @@ drvSeaBreezeAPI::drvSeaBreezeAPI(const char *port, const char* serialNum, int nu
     createParam(connStatusString,          asynParamInt32,         &P_conn);
     createParam(reconnectString,           asynParamInt32,         &P_reconn);
     createParam(trigModeString,            asynParamInt32,         &P_trigMode);
+    createParam(eventCodeString,           asynParamInt32,         &P_eventCode);
 
     // Start the main thread
     epicsThreadId tid = epicsThreadCreate("drvSeaBreezeAPIMain",
@@ -161,6 +162,7 @@ void drvSeaBreezeAPI::pollerThread() {
     setIntegerParam(P_acquire, acquire);
     setDoubleParam(P_updateTime, update_time);
     setIntegerParam(P_subtractBkg, 0);
+    setIntegerParam(P_eventCode, 0);
     callParamCallbacks();
 
     // Initialize the API
@@ -493,7 +495,9 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
 
 #ifdef EVR_SUPPORT
     epicsTimeStamp evr_timestamp;
-    if (evrTimeGet(&evr_timestamp, 0) == 0) {
+    int event_code = 0;
+    getIntegerParam(P_eventCode, &event_code);
+    if (evrTimeGet(&evr_timestamp, event_code) == 0) {
         if (setTimeStamp(&evr_timestamp) != asynSuccess) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
                     "%s::%s: Error in setTimeStamp()\n",

@@ -184,3 +184,12 @@ record(mbbo, "$(P):TrigModeSet") {
     info(autosaveFields, "VAL")
 }
 
+record(longout, "$(P):EventCode") {
+    field(DESC, "Timestamp event code")
+    field(DTYP, "asynInt32")
+    field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) EVENT_CODE")
+    field(VAL,  "0")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")
+}
+
