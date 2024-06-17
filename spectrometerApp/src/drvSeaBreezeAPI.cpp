@@ -445,19 +445,9 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
     asynStatus status = asynSuccess;
     int spectrum_length = 0;
 
-    spectrum_length = sbapi_spectrometer_get_formatted_spectrum_length(_device_id,
-            _feature_id, &error);
-    _check_error(_device_id, error, "sbapi_spectrometer_get_formatted_spectrum_length");
-    if ((spectrum_length <= 0) || (spectrum_length != _spectrum_length)) {
-        asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
-                "%s::%s: Error getting spectrum length\n",
-                driverName.c_str(), functionName.c_str());
-        return;
-    }
-
-    spectrum_length = sbapi_spectrometer_get_wavelengths(_device_id,
-            _feature_id, &error, _wavelengths, _spectrum_length);
-    _check_error(_device_id, error, "sbapi_spectrometer_get_wavelengths");
+    spectrum_length = sbapi_spectrometer_get_formatted_spectrum(_device_id,
+            _feature_id, &error, _spectrum, _spectrum_length);
+    _check_error(_device_id, error, "sbapi_spectrometer_get_formatted_spectrum");
     // If we get a transfer error, the device has been disconnected
     if (error == ERROR_TRANSFER_ERROR) {
         asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
@@ -468,29 +458,9 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
         return;
     } else if ((spectrum_length <= 0) || (spectrum_length != _spectrum_length)) {
         asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
-                "%s::%s: Error getting wavelengths\n",
-                driverName.c_str(), functionName.c_str());
-        return;
-    }
-
-    spectrum_length = sbapi_spectrometer_get_formatted_spectrum(_device_id,
-            _feature_id, &error, _spectrum, _spectrum_length);
-    _check_error(_device_id, error, "sbapi_spectrometer_get_formatted_spectrum");
-    if ((spectrum_length <= 0) || (spectrum_length != _spectrum_length)) {
-        asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
                 "%s::%s: Error getting spectrum\n",
                 driverName.c_str(), functionName.c_str());
         return;
-    }
-
-    getIntegerParam(P_subtractBkg, &subtract_background);
-    if (subtract_background) {
-        for (int i=0; i<_spectrum_length; i++) {
-            _spectrum[i] -= _background_spectrum[i];
-            if (_spectrum[i] < 0.0) {
-                _spectrum[i] = 0.0;
-            }
-        }
     }
 
 #ifdef EVR_SUPPORT
@@ -506,9 +476,28 @@ Get wavelengths and spectrum arrays, optionally subtract background, push to rec
     }
 #endif
 
+    spectrum_length = sbapi_spectrometer_get_wavelengths(_device_id,
+            _feature_id, &error, _wavelengths, _spectrum_length);
+    _check_error(_device_id, error, "sbapi_spectrometer_get_wavelengths");
+    if ((spectrum_length <= 0) || (spectrum_length != _spectrum_length)) {
+        asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
+                "%s::%s: Error getting wavelengths\n",
+                driverName.c_str(), functionName.c_str());
+        return;
+    }
+
+    getIntegerParam(P_subtractBkg, &subtract_background);
+    if (subtract_background) {
+        for (int i=0; i<_spectrum_length; i++) {
+            _spectrum[i] -= _background_spectrum[i];
+            if (_spectrum[i] < 0.0) {
+                _spectrum[i] = 0.0;
+            }
+        }
+    }
+
     status = doCallbacksFloat64Array(_wavelengths, _spectrum_length, P_wavelengths, 0);
     status = doCallbacksFloat64Array(_spectrum, _spectrum_length, P_spectrum, 0);
-
     if (status != asynSuccess) {
         asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
                 "%s::%s: Error in spectrum callback\n",

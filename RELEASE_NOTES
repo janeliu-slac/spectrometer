@@ -5,6 +5,9 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
+R1.0.5  17-Jun-2024  M. Dunning (mdunning)
+    Reorganize _get_spectrum() to get/set timestamp as soon as possible
+
 R1.0.4  6-Jun-2024  M. Dunning (mdunning)
     Add PV to set event code for EVR timestamping
     Add ability to build IOC binary (Basil Aljamal)
