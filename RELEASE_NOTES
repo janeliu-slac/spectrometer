@@ -5,6 +5,9 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
+R1.0.5-branch  13-Aug-2024  M. Dunning (mdunning)
+    Downgrade evrClient module (for now) to match ProfileMonitorAD
+
 R1.0.5  17-Jun-2024  M. Dunning (mdunning)
     Reorganize _get_spectrum() to get/set timestamp as soon as possible
 

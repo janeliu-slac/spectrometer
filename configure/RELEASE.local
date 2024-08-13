@@ -20,7 +20,7 @@
 # could match a directory name.
 # ==========================================================
 ASYN_MODULE_VERSION = R4.39-1.0.1
-EVRCLIENT_MODULE_VERSION = R1.5.2
+EVRCLIENT_MODULE_VERSION = R1.5.1
 TIMINGAPI_MODULE_VERSION = R0.6
 
 # ==========================================================
