@@ -5,6 +5,12 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
+R1.1.0  18-Nov-2024  M. Dunning (mdunning)
+    Add driver for OceanDirect API, which supports newer Ocean Optics spectrometers. 
+        Tested with SR-6 (USB) on linuxRT (buildroot-2019.08-x86_64), API version 2.4.0.
+        OceanDirect only supports newer compilers (gcc >= 5.1.0). This means that rhel7 
+            is not supported, but buildroot 2019.08 is (with API version <= 2.4.0).
+
 R1.0.5  17-Jun-2024  M. Dunning (mdunning)
     Reorganize _get_spectrum() to get/set timestamp as soon as possible
 
