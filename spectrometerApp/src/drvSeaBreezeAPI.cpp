@@ -624,8 +624,8 @@ asynStatus drvSeaBreezeAPI::writeFloat64(asynUser *pasynUser, epicsFloat64 value
                 "%s:%s: warning, update time too small, changed from %f to %f\n", 
                 driverName.c_str(), functionName.c_str(), value, _min_update_time);
             value = _min_update_time;
-            setDoubleParam(P_updateTime, value);
         }
+        setDoubleParam(P_updateTime, value);
         /* If the update time has changed and we are acquiring then wake up the acquisition task */
         getIntegerParam(P_acquire, &acquire);
         if (acquire) epicsEventSignal(_eventId);

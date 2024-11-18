@@ -2,7 +2,15 @@
 spectrometer EPICS module
 ==========================
 
-An epics support module for spectrometers and related devices
+An epics support module for spectrometers and related devices.
+
+This module supports the following OceanOptics APIs:
+- OceanDirect (newest) - tested with SR-6
+- SeaBreezeAPI (old) - tested with STS, HR2000
+- SeaBreezeWrapper (oldest) - tested with HR2000
+
+See https://www.oceanoptics.com/software/
+
 
 To add this module to an IOC application:
     - Add release path to configure/RELEASE

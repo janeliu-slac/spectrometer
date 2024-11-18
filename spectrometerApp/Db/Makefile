@@ -13,6 +13,7 @@ include $(TOP)/configure/CONFIG
 
 DB += seabreezeWrapper.template
 DB += seabreezeAPI.template
+DB += oceanDirect.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------
