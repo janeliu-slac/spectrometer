@@ -24,6 +24,7 @@ record(ao, "$(P):UpdateTimeSet") {
     field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) UPDATE_TIME")
     field(PREC, "3")
     field(EGU,  "s")
+    field(PINI, "1")
     info(asyn:READBACK, "1")
     info(autosaveFields, "VAL")
 }
@@ -136,6 +137,7 @@ record(bo, "$(P):BkgSubEnable") {
     field(OUT,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1)) BKG")
     field(ZNAM, "Disable")
     field(ONAM, "Enable")
+    field(PINI, "1")
     info(autosaveFields, "VAL")
 }
 
