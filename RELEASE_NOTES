@@ -5,6 +5,9 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
+R1.2.0 01-10-2025 Jane Liu (janeliu-slac)
+    Updated to asyn/R4.42-1.0.0, evrClient/R1.5.4, timingApi/R0.11
+
 R1.1.0  18-Nov-2024  M. Dunning (mdunning)
     Add driver for OceanDirect API, which supports newer Ocean Optics spectrometers. 
         Tested with SR-6 (USB) on linuxRT (buildroot-2019.08-x86_64), API version 2.4.0.
