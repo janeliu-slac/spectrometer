@@ -53,11 +53,16 @@ STATIC_BUILD=YES
 # Define the archiecture versions
 # =============================
 LINUXRT_BUILDROOT_VERSION=buildroot-2019.08
+
+ifeq ($(findstring rhel7,$(EPICS_HOST_ARCH)),rhel7)
 LINUX_VERSION=rhel7
+endif
+ifeq ($(findstring rhel9,$(EPICS_HOST_ARCH)),rhel9)
+LINUX_VERSION=rhel9
+endif
 
 # =======================================================
 # Names/locations of external non-EPICS packages
 # =======================================================
 
 # End of file
-
