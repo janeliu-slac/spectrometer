@@ -20,19 +20,21 @@
 # could match a directory name.
 # ==========================================================
 ASYN_MODULE_VERSION = R4.42-1.0.0
-EVRCLIENT_MODULE_VERSION = R1.5.5
-TIMINGAPI_MODULE_VERSION = R0.11
+EVRCLIENT_MODULE_VERSION = R1.5.4
+TIMINGAPI_MODULE_VERSION = R0.9
 
 # ==========================================================
 # Define module paths using pattern
 # FOO = $(EPICS_MODULES)/foo/$(FOO_MODULE_VERSION)
 #  or
 # FOO = /Full/Path/To/Development/Version 
-# ==========================================================)
+# ==========================================================
 ASYN = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 
 ifeq ($(findstring pcds,$(FACILITY_ROOT)),)
-    EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
+    #EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
+    EVRCLIENT = /cds/home/j/janeliu/git/slac-epics/evrClient
+
     TIMINGAPI = $(EPICS_MODULES)/timingApi/$(TIMINGAPI_MODULE_VERSION)
 endif
 
