@@ -32,9 +32,7 @@ TIMINGAPI_MODULE_VERSION = R0.9
 ASYN = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 
 ifeq ($(findstring pcds,$(FACILITY_ROOT)),)
-    #EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
-    EVRCLIENT = /cds/home/j/janeliu/git/slac-epics/evrClient
-
+    EVRCLIENT = $(EPICS_MODULES)/evrClient/$(EVRCLIENT_MODULE_VERSION)
     TIMINGAPI = $(EPICS_MODULES)/timingApi/$(TIMINGAPI_MODULE_VERSION)
 endif
 
