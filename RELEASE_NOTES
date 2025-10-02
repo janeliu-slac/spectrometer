@@ -5,8 +5,8 @@ RELEASE_NOTES for spectrometer module
 See README for module info
 #==============================================================
 
-R1.2.0 01-10-2025 Jane Liu (janeliu-slac)
-    Updated to asyn/R4.42-1.0.0, evrClient/R1.5.5, timingApi/R0.11
+R1.0.6 01-10-2025 Jane Liu (janeliu-slac)
+    Updated to asyn/R4.42-1.0.0
     Added support for seabreeze 3.0.11 on Rocky 9
 
 R1.1.0  18-Nov-2024  M. Dunning (mdunning)
